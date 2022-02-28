@@ -106,6 +106,7 @@ $faq = [
     ],
 ];
 
+
 foreach ($faq as $item) {
     // Creazione array dei link
     $links = $item['links'];
@@ -116,17 +117,23 @@ foreach ($faq as $item) {
         $searched_word = $string;
         $replaced_string = '<a>' . $searched_word . '</a>';
 
-        // Effettuo la sostituzione
-        $new_paragraph = str_replace(
-            $searched_word,
-            $replaced_string,
-            $item['answer']
-        );
-        // Se $newp... non è nulla sostituisci
-        if ($new_paragraph !== null) $item['answer'] = $new_paragraph;
+        // Vedo se la stringa da sostituire è presente
+        $pos = strpos($item['answer'], $searched_word,);
+
+        if ($pos) {
+            $item['answer'] = str_replace(
+                $searched_word,
+                $replaced_string,
+                $item['answer']
+            );
+            echo $item['answer'];
+        }
     }
-    var_dump($item['answer']);
 }
+
+
+var_dump($faq);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
